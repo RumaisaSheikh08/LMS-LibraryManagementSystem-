@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "PaymentDues";
+}
+
+<div class="card shadow-lg border-0 rounded-4 mx-auto mt-5" style="max-width: 500px; background-color: #0e86d4;">
+    <div class="card-body text-white p-4">
+        <h4 class="card-title text-center mb-4">💳 Pay Dues</h4>
+        <form>
+            <div class="mb-3">
+                <label for="cardName" class="form-label">Name on Card</label>
+                <input type="text" name="nameCard" class="form-control rounded-3" id="cardName" placeholder="John Doe">
+            </div>
+            <div class="mb-3">
+                <label for="cardNumber" class="form-label">Card Number</label>
+                <input type="text" name="cardNumber" class="form-control rounded-3" id="cardNumber" placeholder="1234 5678 9012 3456">
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label for="expiryDate" class="form-label">Expiry Date</label>
+                    <input type="text" name="dateExpiry" class="form-control rounded-3" id="expiryDate" placeholder="MM/YY">
+                </div>
+                <div class="col-md-6">
+                    <label for="securityCode" class="form-label">Security Code</label>
+                    <input type="text" name="securityCode" class="form-control rounded-3" id="securityCode" placeholder="CVV">
+                </div>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-light fw-bold" style="color: #0e86d4;">Pay Now</button>
+            </div>
+        </form>
+    </div>
+</div>

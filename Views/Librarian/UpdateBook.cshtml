@@ -1,0 +1,76 @@
+﻿@model BooksModel
+@{
+    ViewData["Title"] = "UpdateBook";
+}
+<style>
+    .form-label {
+        margin-left: 5px;
+        font-weight: 600;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">Update Book Details</h2>
+
+    <form asp-controller="Librarian" asp-action="UpdatedBook" method="post">
+        <div class="row g-3">
+            <div class="col-md-6 col-lg-3 form-section">
+                <label class="form-label">Title</label>
+                <input type="text" asp-for="Title" name="Title" class="form-control" placeholder="Title">
+            </div>
+            <div class="col-md-6 col-lg-3 form-section">
+                <label class="form-label">Author</label>
+                <input type="text" asp-for="Author" name="Author" class="form-control" placeholder="Author">
+            </div>
+            <div class="col-md-6 col-lg-3 form-section">
+                <label class="form-label">Category</label>
+                <input type="text" asp-for="Category" name="Category" class="form-control" placeholder="Category">
+            </div>
+            <div class="col-md-6 col-lg-3 form-section">
+                <label class="form-label">Available Copies</label>
+                <input type="text" asp-for="AvailableCopies" name="AvailableCopies" class="form-control" placeholder="Copies">
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="BookID" name="BookID" />
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-4">Update Book</button>
+        </div>
+    </form>
+
+    @if (TempData["Status"]?.ToString() == "Successfully Updated")
+    {
+        <div class="modal fade show" id="statusModal" tabindex="-1" role="dialog" style="display:block;" aria-modal="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Book Details Updated</h5>
+                        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>The details for the following book have been updated successfully.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function closeModal() {
+                document.getElementById("statusModal").style.display = "none";
+                document.querySelector(".modal-backdrop")?.remove();
+            }
+
+            $(document).ready(function () {
+                $('body').append('<div class="modal-backdrop fade show"></div>');
+            });
+        </script>
+    }
+</div>

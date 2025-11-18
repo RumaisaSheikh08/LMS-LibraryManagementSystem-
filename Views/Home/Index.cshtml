@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style type="text/css">
+    h1{
+        padding-top: 20px;
+        font-weight: bold;
+    }
+    p{
+        font-weight: bold;
+    }
+
+    .libClass {
+        background-color: forestgreen;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        cursor: pointer;
+    }
+
+    .libClass:hover {
+        background-color: seagreen;
+        transform: scale(1.05);
+    }
+
+    .stdClass {
+        background-color: deepskyblue;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        cursor: pointer;
+        margin-top:2px;
+    }
+
+    .stdClass:hover {
+        background-color: skyblue;
+        transform: scale(1.05);
+    }
+
+    .logoHead {
+        margin-left: -1050px;
+        padding-top: 12px;
+        font-family: "Dancing Script", cursive;
+        font-size: 30px;
+    }
+</style>
+
+<div style="width: 100%; height: 50px; text-align: center; line-height: 50px;">
+    <h4 class="logoHead">Bradford Library</h4>
+</div>
+<div class="text-center">
+    <h1 class="display-4">Welcome to Bradford Library</h1>
+    <p>Discover Books, Reserve Instantly, Stay Informed</p>
+    <div class="card" style="width: 40rem; margin-left:300px; border-color: maroon; border-width:10px;">
+        <div class="card-body">
+            <h5 style="font-weight:bold;">Choose your role</h5>
+            <div class="row">
+                <div class="col-sm-4 mb-3 mb-sm-0" style="margin-left: 120px;">
+                    <div class="card" style="border-width:6px; border-radius: 8px; border-color:forestgreen">
+                        <div class="card-body">
+                            <h5 class="card-title">Are you a Librarian?</h5>
+                            <img src="~/img/istockphoto-514781014-612x612.jpg" style="height:80%" class="card-img-top" alt="...">
+                            <button type="submit" class="libClass" onclick="LibLogin()">Librarian</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card" style="border-width:6px; border-radius: 8px; border-color:deepskyblue">
+                        <div class="card-body">
+                            <h5 class="card-title">Are you a Student?</h5>
+                            <img src="~/img/pngtree-focused-learning-cartoon-study-scene-png-image_15668799.png" class="card-img-top" alt="...">
+                            <button type="submit" class="stdClass" onclick="StdLogin()">Student</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+
+  
+</div>
+
+<script type="text/javascript">
+    function StdLogin(){
+        window.location.href = '@Url.Action("Login", "Student")';
+    }
+
+    function LibLogin(){
+        window.location.href = '@Url.Action("Login", "Librarian")';
+
+    }
+</script>
+

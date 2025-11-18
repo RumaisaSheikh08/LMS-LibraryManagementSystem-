@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "SearchBook";
+}
+
+<style>
+    .btnReserve {
+        margin-left: 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: #0e86d4;
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .btnReserve:hover {
+            background-color: #095c94;
+        }
+
+    .bookNotAvailable {
+        margin-left: 20px;
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .book-card {
+        max-width: 740px;
+        margin: 100px auto;
+        height: 350px;
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-body h3, .card-body h6 {
+        margin-bottom: 10px;
+    }
+
+    .card-body p {
+        font-size: 14px;
+        color: #555;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="card book-card">
+    <div class="row g-0 h-100">
+        <div class="col-md-4 h-100">
+            <img src="~/img/istockphoto-1488757965-612x612.jpg" class="img-fluid h-100 w-100 object-fit-cover rounded-start" alt="Book Cover">
+        </div>
+        <div class="col-md-8 h-100 d-flex flex-column justify-content-center">
+            <form asp-controller="Student" asp-action="ReserveBook" method="post">
+                <div class="card-body">
+                    <h3 class="card-title">@ViewBag.BookDetails.Title</h3>
+                    <h6 class="card-subtitle text-muted">@ViewBag.BookDetails.Author - @ViewBag.BookDetails.Category</h6>
+                    <p class="card-text">
+                        Books are portals to countless worlds, offering not just knowledge, but an escape into imagination.
+                        Whether it’s a mystery unraveling in a foggy London alley or wisdom from ancient philosophers,
+                        books connect minds across time and place.
+                    </p>
+                    @if (ViewBag.BookDetails.AvailableCopies != 0)
+                    {
+                        <button type="submit" class="btnReserve">Reserve Book</button>
+                    }
+                    else
+                    {
+                        <h6 class="bookNotAvailable">Sorry! Book is not available to be issued. Please try later.</h6>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+                 

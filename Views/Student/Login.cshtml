@@ -1,0 +1,79 @@
+﻿
+@{
+    @model StudentModel
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .card{
+        width: 18rem;
+        margin-left: 500px;
+    }
+    h5,p{
+        margin-left:200px;
+    }
+    p{
+        margin-left: 140px;
+    }
+    img{
+        height:250px;
+    }
+
+    button{
+        margin-left: 230px;
+        padding-right: 80px;
+        padding-left: 80px;
+    }
+
+    .container{
+        margin-left: 100px;
+        color:red;
+        margin-top:10px;    
+    }
+    .logoHead{
+        margin-left: -1050px;
+        padding-top: 12px;
+        font-family: "Dancing Script", cursive;
+        font-size:30px;
+    }
+
+
+    
+</style>
+
+<div style="width: 100%; height: 50px; text-align: center; line-height: 50px;display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <h4  class="logoHead">Bradford Library</h4>
+</div>
+
+<div>
+    <div class="card" style="width: 35rem; margin-left:340px; margin-top:-14px; background-color:#0e86d4; border-block:solid;">
+        <img src="~/img/pngtree-focused-learning-cartoon-study-scene-png-image_15668799.png" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Student Login</h5>
+            <p class="card-text">Welcome Back! Let’s Continue Reading</p>
+            <div class="container">
+                @if (TempData["Error"]?.ToString() == "Invalid email or password.")
+                {
+                    <h6>Invalid Email or Password. Please try again.</h6>
+                }
+            </div>
+            <form asp-controller="Student" asp-action="Login" method="post">
+            <div class="mb-3 row">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" asp-for = "Email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                        <input type="password" asp-for="Password"  class="form-control" id="inputPassword">
+                </div>
+            </div>
+                <a class="nav-link active" asp-controller="Student" asp-action="RegisterStudent" style="color:black; margin-left:130px;">Doesnot have an account? Register</a>
+                <button class="btn btn-primary" style="color: black;border-color: black;">Login</button>
+      
+            </form>
+        </div>
+    </div>
+</div>

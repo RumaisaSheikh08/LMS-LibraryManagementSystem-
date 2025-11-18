@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "GenerateReports";
+}
+
+<style>
+    .stdHead {
+        padding: 30px;
+        margin-left: 450px;
+    }
+</style>
+
+<div class="stdHead">
+    <h2>Generate Reports</h2>
+</div>
+
+
+<div class="d-flex justify-content-center gap-3">
+    <div class="card" style="width: 30rem; margin-left: 20px; height: 30rem;">
+        <img src="~/img/isaac-smith-6EnTPvPPL6I-unsplash.jpg" class="card-img-top" alt="..." style="height: 50%">
+        <div class="card-body">
+            <h5 class="card-title">Book Inventory Reports</h5>
+            <p class="card-text">
+                Generate a book inventory report to gain insights into the library's collection, including book details and availability status. This helps in monitoring usage, managing resources efficiently, and ensuring students have access.
+            </p>
+            <a href="http://desktop-pr32pp4:8080/ReportServer?/LMSReportProject/BookInventoryReport&rs:Command=Render&rs:Format=EXCEL" target="_blank" class="btn btn-success">
+                Export to Excel
+            </a>
+           </div>
+    </div>
+
+    <div class="card" style="width: 30rem; height: 30rem;">
+        <img src="~/img/jakub-zerdzicki-fgNgbnMdgBM-unsplash.jpg" class="card-img-top" alt="..." style="height: 50%">
+        <div class="card-body">
+            <h5 class="card-title">Registered Student Report</h5>
+            <p class="card-text">
+                Generate a student management report to track student activity, book reservations, and return history. This helps in ensuring accountability, managing dues, and improving overall library service efficiency.
+            </p>
+            <a href="http://desktop-pr32pp4:8080/ReportServer?/LMSReportProject/StudentRegisteration&rs:Command=Render&rs:Format=EXCEL" target="_blank" class="btn btn-success">
+                Export to Excel
+            </a>
+        </div>
+    </div>
+    <div class="card" style="width: 30rem; height: 30rem;">
+        <img src="~/img/stephen-dawson-qwtCeJ5cLYs-unsplash.jpg" class="card-img-top" alt="..." style="height: 50%">
+        <div class="card-body">
+            <h5 class="card-title">Due Date Transaction Reports</h5>
+            <p class="card-text">
+                Generate a due date transaction report to monitor overdue books, track return deadlines, and identify pending dues. This report helps maintain timely returns and ensures fair access to library resources for all users.
+            </p>
+            <a href="http://desktop-pr32pp4:8080/ReportServer?/LMSReportProject/TransactionReport&rs:Command=Render&rs:Format=EXCEL" target="_blank" class="btn btn-success">
+                Export to Excel
+            </a>
+
+        </div>
+    </div>
+
+    <div />
+
+</div>
+

@@ -1,0 +1,34 @@
+﻿@model List<StudentModel>
+
+@{
+    ViewData["Title"] = "StudentRegisteration";
+}
+<div class="d-flex flex-wrap justify-content-start gap-3 p-3">
+    @if(Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img src="~/img/kenny-eliason-zFSo6bnZJTw-unsplash.jpg" class="card-img-top" alt="Book Image">
+                <div class="card-body">
+                    <h5 class="card-title">@item.StudentID</h5>
+                    <p class="card-text">
+                        <strong>Author:</strong> @item.Name<br />
+                        <strong>Category:</strong> @item.Email<br />
+                    </p>
+                    <form asp-controller="Librarian" asp-action="ApproveRequest" method="post">
+                        <input type="hidden" name="StudentID" value="@item.StudentID" />
+                        <button type="submit" class="btn btn-primary">Approve Request</button>
+                    </form>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3 style="margin-left: 340px; margin-top: 50px;">No Request For Student Registeration Approval</h3>
+    }
+   
+</div>
+
+

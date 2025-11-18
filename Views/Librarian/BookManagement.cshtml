@@ -1,0 +1,115 @@
+﻿@model List<BooksModel>
+
+@{
+    ViewData["Title"] = "BookManagement";
+}
+
+<style>
+    .headStart{
+        margin-left: 480px;
+        margin-top: 30px;
+    }
+    /* .container{
+        margin-top: 10px;
+        border-block:solid;
+        border-block-color: black;
+        border-radius: 8px;
+        padding: 8px;
+    } */
+</style>
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">📘 Insert New Book</h2>
+
+    <form asp-controller="Librarian" asp-action="BookManagement" method="post" class="bg-light p-4 rounded-4 shadow">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" placeholder="Enter book title">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Author</label>
+                <input type="text" name="author" class="form-control" placeholder="Enter author name">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Category</label>
+                <input type="text" name="category" class="form-control" placeholder="Enter category">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Number of Copies</label>
+                <input type="number" name="noCopies" class="form-control" placeholder="Available copies">
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm">Add Book</button>
+        </div>
+    </form>
+
+    @if (TempData["Message"]?.ToString() == "Successfully Added")
+    {
+        <div class="modal fade show" id="statusModal" tabindex="-1" role="dialog" style="display: block;" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content shadow-lg">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">✅ Book Added</h5>
+                        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>The book details have been successfully added!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function closeModal() {
+                document.getElementById("statusModal").style.display = "none";
+                document.querySelector(".modal-backdrop")?.remove();
+            }
+
+            $(document).ready(function () {
+                $('body').append('<div class="modal-backdrop fade show"></div>');
+            });
+        </script>
+    }
+</div>
+
+
+<div class="container mt-3">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-body p-4">
+            <h2 class="text-center fw-bold mb-4">📚 Available Books</h2>
+
+            <div class="d-flex flex-wrap justify-content-start gap-4 p-3">
+                @foreach (var item in Model)
+                {
+                    <div class="card border-0 shadow-sm" style="width: 18rem; background-color: #f5f6fa;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold">@item.Title</h5>
+                            <p class="card-text text-secondary" style="font-size: 0.9rem;">
+                                <strong>Author:</strong> @item.Author<br />
+                                <strong>Category:</strong> @item.Category<br />
+                                <strong>Available Copies:</strong> @item.AvailableCopies
+                            </p>
+                            <div class="d-flex gap-2 mt-3">
+                                <form asp-controller="Librarian" asp-action="UpdateBook" method="post">
+                                    <input type="hidden" name="BookID" value="@item.BookID" />
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                                </form>
+                                <form asp-controller="Librarian" asp-action="DeleteBook" method="post">
+                                    <input type="hidden" name="BookID" value="@item.BookID" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

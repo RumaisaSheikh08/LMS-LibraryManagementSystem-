@@ -1,0 +1,216 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+<style>
+    .stdHead {
+        padding: 30px;
+        margin-left: 450px;
+    }
+
+    p {
+        margin-left: -235px;
+    }
+
+    .bookSearchCard {
+        width: 100%;
+        padding: 50px 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .searchCard {
+        width: 100%;
+        max-width: 1000px;
+        background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent card */
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .headSearch {
+        font-size: 28px;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+    }
+
+    #searchBox {
+        width: 100%;
+        padding: 14px 18px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+
+    #searchBox:focus {
+        border-color: #007BFF;
+        outline: none;
+    }
+
+    .searchBtn {
+        width: 100%;
+        padding: 14px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 2px;
+    }
+
+    .searchBtn:hover {
+        background-color: #0056b3;
+    }
+
+    .container {
+        background-color: #e6f4ff;
+        border-left: 5px solid #007BFF;
+        padding: 15px;
+        border-radius: 6px;
+    }
+
+    .bookAvailable {
+        margin: 0;
+        color: #004085;
+        font-size: 14px;
+    }
+
+    #results {
+        min-height: 30px;
+        color: #666;
+    }
+
+    .highlight {
+        font-weight: bold;
+        background-color: yellow;
+    }
+
+    .bookAvailable {
+        margin-left: 120px;
+        color: red;
+        font-weight:bold;
+        margin-top: 5px;
+    }
+
+    .container{
+        background-color: #d4f1f4;
+    }
+</style>
+
+<div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color:black;">Bradford Library</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" style="color:black;">@ViewBag.Email</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("MyBooks", "Student")" style="color:black;">My Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("Logout", "Student")" style="color:black;">Logout</a>
+                    </li>
+                  
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="stdHead">
+        <h2>Welcome! @ViewBag.Name</h2>
+        <p>
+            Welcome to your personalized learning space — dive in, explore new knowledge, and enjoy an inspiring reading journey ahead!
+        </p>
+    </div>
+
+    <div class="bookSearchCard">
+        <div class="searchCard">
+            <h3 class="headSearch">Search Books</h3>
+
+            <form asp-controller="Student" asp-action="SearchBook" method="post">
+                <input type="text" id="searchBox" name="searchTerm" placeholder="Search books..." autocomplete="off" />
+                <div id="results"></div>
+
+                <button type="submit" class="searchBtn">Search</button>
+
+                @if (Convert.ToString(@TempData["Status"]) == "Request Sent")
+                {
+                    <div class="container">
+                        <h6 class="bookAvailable">
+                            Request for approval has been sent. Once approved, you will be able to check in your "My Books".
+                        </h6>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+
+   
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    let allBooks = [];
+
+    function highlightMatch(text, keyword) {
+        const regex = new RegExp("(" + keyword + ")", "gi");
+        return text.replace(regex, "<span class='highlight'>$1</span>");
+    }
+
+    function filterBooks(keyword) {
+        const filtered = allBooks.filter(b =>
+            b.Title.toLowerCase().includes(keyword.toLowerCase())
+        );
+
+        let resultHtml = "<ul>";
+        filtered.forEach(b => {
+            resultHtml += `<li>${highlightMatch( b.Title + ' - ' + b.Category, keyword)}</li>`;
+        });
+        resultHtml += "</ul>";
+
+        if (filtered.length > 0) {
+            $('#results').html(resultHtml).show();
+        } else {
+            $('#results').hide();
+        }
+    }
+
+    $(document).ready(function () {
+        allBooks = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.Books));
+
+
+        $('#searchBox').on('input', function () {
+            const keyword = $(this).val().trim();
+            if (keyword === "") {
+                $('#results').hide();
+                return;
+            }
+            filterBooks(keyword);
+        });
+
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('#searchBox, #results').length) {
+                $('#results').hide();
+            }
+        });
+
+        $('#results').on('click', 'li', function () {
+            $('#searchBox').val($(this).text());
+            $('#results').hide();
+        });
+    });
+</script>
