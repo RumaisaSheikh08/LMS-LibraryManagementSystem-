@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "LMSReportProject", "LMSReportProject.rptproj", "{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.Debug|Default.ActiveCfg = Debug
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.Debug|Default.Build.0 = Debug
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.Debug|Default.Deploy.0 = Debug
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.DebugLocal|Default.Build.0 = DebugLocal
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.Release|Default.ActiveCfg = Release
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.Release|Default.Build.0 = Release
+		{2BC80BCC-59B9-4AA3-A74F-38FC23F3CB99}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
